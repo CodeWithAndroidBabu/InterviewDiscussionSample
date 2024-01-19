@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "759205007583",
+    "project_id": "neomocktest-a6eb8",
+    "storage_bucket": "neomocktest-a6eb8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:759205007583:android:fc6be630c3dfe0feb1996a",
+        "android_client_info": {
+          "package_name": "com.neomocktest.deep"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCywe0tETCsV0WlqGmrD8rYAoj9lVMxPIY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

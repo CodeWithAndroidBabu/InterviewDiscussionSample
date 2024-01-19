@@ -1,0 +1,73 @@
+{
+  ConstraintSets: {
+    start: {
+      profileImg: {
+        width: 60,
+        height: 60,
+        start: ['parent', 'start', 16],
+        top: ['parent', 'top', 16],
+        custom: {
+          background: '#FFFFFF'
+        }
+      },
+      userName: {
+        top: ['profileImg', 'top'],
+        bottom: ['profileImg', 'bottom'],
+        start: ['profileImg', 'end', 16]
+      },
+      container: {
+        width: 'spread',
+        height: 'spread',
+        start: ['parent', 'start'],
+        end: ['parent', 'end'],
+        top: ['parent', 'top'],
+        bottom: ['parent', 'bottom', -16],
+      }
+    },
+    end: {
+      profileImg: {
+        width: 150,
+        height: 150,
+        start: ['parent', 'start'],
+        end: ['parent', 'end'],
+        top: ['parent', 'top', 16],
+        custom: {
+          background: '#FFFFFF'
+        }
+      },
+      userName: {
+        top: ['profileImg', 'bottom', 16],
+        end: ['parent', 'end'],
+        start: ['parent', 'start']
+      },
+      container: {
+        width: 'spread',
+        height: 'spread',
+        start: ['parent', 'start'],
+        end: ['parent', 'end'],
+        top: ['parent', 'top'],
+        bottom: ['parent', 'bottom', -16],
+      }
+    }
+  },
+  Transitions: {
+    default: {
+      from: 'start',
+      to: 'end',
+      pathMotionArc: 'startHorizontal',
+      KeyFrames: {
+        KeyAttributes: [
+          {
+            target: ['profileImg'],
+            frames: [0, 100]
+          },
+          {
+            target: ['userName'],
+            frames: [0, 50, 100],
+            translationX: [0, 70, 0],
+          }
+        ]
+      }
+    }
+  }
+}
