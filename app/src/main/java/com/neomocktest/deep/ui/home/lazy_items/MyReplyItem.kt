@@ -23,6 +23,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.neomocktest.deep.theme.skyBlue
@@ -33,8 +34,9 @@ import com.neomocktest.deep.ui.components.LoadAsyncImg
  * @Date: 08/01/24
  */
 
+@Preview
 @Composable
-fun MyReplyItem(userName: String, userReply: String) {
+fun MyReplyItem(userName: String = "", userReply: String = "") {
     Box(
         modifier = Modifier
             .padding(8.dp),
@@ -67,7 +69,7 @@ fun MyReplyItem(userName: String, userReply: String) {
                             end = 10.dp,
                             bottom = 2.dp
                         ),
-                        text = userName,
+                        text = "userName",
                         color = Color.White,
                         fontSize = 15.sp,
                         style = TextStyle(fontWeight = FontWeight.Bold)

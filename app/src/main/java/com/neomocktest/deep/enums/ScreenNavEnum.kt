@@ -7,5 +7,6 @@ package com.neomocktest.deep.enums
 
 enum class ScreenNavEnum {
     HOME,
-    PROFILE
+    PROFILE,
+    COMMENT
 }

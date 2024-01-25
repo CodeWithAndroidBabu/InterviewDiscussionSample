@@ -7,4 +7,4 @@ import java.io.Serializable
  * @Date: 01/11/23
  */
 
-data class Users(val empId: String = "", val name: String = "", val img: String = ""): Serializable
+data class Users(val empId: String = "", val empName: String = "", val empImg: String = ""): Serializable

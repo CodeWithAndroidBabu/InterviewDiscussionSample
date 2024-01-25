@@ -1,4 +1,4 @@
-package com.neomocktest.deep.ui.home
+package com.neomocktest.deep.ui.home.pofile
 
 import android.util.Log
 import androidx.compose.animation.core.Animatable
@@ -22,7 +22,6 @@ import androidx.compose.material.icons.filled.ExitToApp
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.material3.Icon
-import androidx.compose.material3.Slider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -232,14 +231,14 @@ fun ProfileScreen() {
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        Slider(
-            value = progress,
-            onValueChange = {
-                progress = it
-                println("progress $it")
-            },
-            modifier = Modifier.padding(horizontal = 32.dp)
-        )
+//        Slider(
+//            value = progress,
+//            onValueChange = {
+//                progress = it
+//                println("progress $it")
+//            },
+//            modifier = Modifier.padding(horizontal = 32.dp)
+//        )
     }
 }
 

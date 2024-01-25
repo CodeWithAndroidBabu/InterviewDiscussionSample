@@ -198,12 +198,10 @@ fun UserAuthenticationScreen(viewMode: AuthViewModel, msg: (String) -> Unit) {
                                     shouldShowDialog.value = false
                                     downloadedImg.value = downloadImgState.data ?: ""
 
-                                    val user =
-                                        Users(
+                                    val user = Users(
                                             empId = empId.value,
-                                            empName.value,
-                                            downloadedImg.value
-                                        )
+                                            empName = empName.value,
+                                            empImg = downloadedImg.value)
 
                                     viewMode.loginSignUpUser(user).collect { state ->
                                         when (state) {
@@ -218,8 +216,6 @@ fun UserAuthenticationScreen(viewMode: AuthViewModel, msg: (String) -> Unit) {
                                                 shouldShowDialog.value = false
                                                 msg.invoke(state.msg)
                                             }
-
-                                            else -> {}
                                         }
                                     }
                                 }
@@ -227,8 +223,6 @@ fun UserAuthenticationScreen(viewMode: AuthViewModel, msg: (String) -> Unit) {
                                 is ApiState.Error -> {}
 
                                 is ApiState.Info -> {}
-
-                                else -> {}
                             }
                         }
                     }

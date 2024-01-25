@@ -14,7 +14,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Send
@@ -25,10 +27,12 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -42,6 +46,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.neomocktest.deep.theme.lightGrey
 import com.neomocktest.deep.theme.skyBlue
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
 
 /**
  * @Author: Deep raj
@@ -58,6 +64,9 @@ fun ReplyAnswerScreen() {
     val list = remember {
         mutableStateListOf<Questions>()
     }
+    val coroutineScope = rememberCoroutineScope()
+
+    val state = rememberLazyListState()
 
     list.add(Questions("Deep", "hajfhajfafafas fasfasfsa "))
     list.add(Questions("Raj", "12131313 fasfasfsa",))
@@ -73,32 +82,35 @@ fun ReplyAnswerScreen() {
     list.add(Questions("Deep", "hajfhajfafafas fasfasfsa "))
     list.add(Questions("Raj", "12131313 fasfasfsa "))
 
-
     var text by rememberSaveable { mutableStateOf("Text") }
     Column(Modifier.fillMaxSize()) {
-        val state = rememberLazyListState()
         LazyColumn(modifier = Modifier
-            .weight(1f)
+            .weight(1f).fillMaxSize()
             .padding(4.dp), content = {
             items(list) {
                 if(it.type == "reply"){
+
                     MyReplyItem(it.name,it.reply)
                 }else{
                     OthersQuestionReplyItem(userName = it.name, userReply = it.reply)
                 }
             }
-        })
-        ChatInputField(list)
+        }, state = state)
+        ChatInputField(list,coroutineScope,state)
         Spacer(modifier = Modifier.height(4.dp))
+        LaunchedEffect(list){
+            state.animateScrollToItem(list.size)
+        }
     }
-
 }
-
-
 
 @OptIn(ExperimentalComposeUiApi::class, ExperimentalMaterial3Api::class)
 @Composable
-fun ChatInputField(list: MutableList<Questions>) {
+fun ChatInputField(
+    list: MutableList<Questions>,
+    coroutineScope: CoroutineScope,
+    state: LazyListState
+) {
     var message by remember { mutableStateOf("") }
     val keyboardController = LocalSoftwareKeyboardController.current
 
@@ -143,14 +155,18 @@ fun ChatInputField(list: MutableList<Questions>) {
                 ) {
                     if (message.isNotBlank()) {
                         // onSendMessage(message)
+
                         message = ""
                         list.add(
                             Questions(
-                                "Deep",
-                                "New Data Added "
+                                name = "Deep",
+                                reply = "New Data Added ",
+                                type = "reply"
                             )
                         )
-
+                        coroutineScope.launch {
+                            state.animateScrollToItem(list.size)
+                        }
                     }
                 }
                 .padding(8.dp)

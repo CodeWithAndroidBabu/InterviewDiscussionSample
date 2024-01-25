@@ -3,7 +3,6 @@ package com.neomocktest.deep.ui.auth.repo
 import android.net.Uri
 import android.util.Log
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.SetOptions
 import com.google.firebase.storage.StorageReference
 import com.neomocktest.deep.data.Users
 import com.neomocktest.deep.shared.SharedRepoImp
@@ -46,7 +45,11 @@ class AuthRepoImpl @Inject constructor() : AuthRepo {
                 val getUserId = getUsersRawData["empId"] as String
                 val getUserImg = getUsersRawData["img"] as String
 
-                val getUser = Users(getUserId,getUserName,getUserImg)
+                val getUser = Users(
+                    empId = getUserId,
+                    empName = getUserName,
+                    empImg = getUserImg)
+
                 sharedPref.saveUser(AppConstant.FBRoomName.USERS,getUser)
                 trySend(ApiState.Info("Welcome Back $getUserName"))
             } else {

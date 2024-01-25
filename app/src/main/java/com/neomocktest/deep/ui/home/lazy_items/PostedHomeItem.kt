@@ -1,5 +1,6 @@
 package com.neomocktest.deep.ui.home.lazy_items
 
+import android.content.Intent
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -14,7 +15,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -27,39 +27,36 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import com.neomocktest.deep.R
 import com.neomocktest.deep.ui.components.ExpandableText
 import com.neomocktest.deep.ui.components.HeartAnimationButton
-import com.neomocktest.deep.ui.components.ImageDrawableButton
 import com.neomocktest.deep.ui.components.LoadAsyncImg
+import com.neomocktest.deep.ui.chat.ChatActivity
 
 
 /**
  * @Author: Deep raj
  * @Date: 29/12/23
  */
-@Preview
+
 @Composable
-fun PostedHomeItem() {
-
+fun PostedHomeItem(navController: NavHostController) {
+    val context = LocalContext.current
     val buttonColors = ButtonDefaults.buttonColors(
-        containerColor = Color.White, // Change background color as needed
-        contentColor = Color.Black
-    )
+        containerColor = Color.White,
+        contentColor = Color.Black)
 
-    Card(
-        elevation = CardDefaults.elevatedCardElevation(2.dp),
-        shape = RectangleShape,
-        colors = CardDefaults.cardColors(
-            containerColor = Color.White,
-        )
+    Card(modifier = Modifier.padding(6.dp),
+        elevation = CardDefaults.elevatedCardElevation(3.dp),
+        shape = RoundedCornerShape(4.dp),
+        colors = CardDefaults.cardColors(containerColor = Color.White)
     ) {
         Box(
             Modifier
@@ -152,6 +149,9 @@ fun PostedHomeItem() {
                         icon = R.drawable.icon_comment,
                         text = "Comment"
                     ) {
+                        context.startActivity(
+                            Intent(context, ChatActivity::class.java)
+                        )
                     }
                 }
             }

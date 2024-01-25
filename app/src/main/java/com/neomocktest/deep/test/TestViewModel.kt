@@ -23,9 +23,4 @@ class TestViewModel: ViewModel() {
 
     fun executeFour() = repo?.getDataFour()
 
-
-
-
-
-
 }
